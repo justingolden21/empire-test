@@ -1,2 +1,4 @@
-# empire-test
-test repo for empire website
+# Empire Test
+
+test repo for empire collectibles website
+
