@@ -6,7 +6,7 @@
 <meta charset="utf-8">
 <meta name="title=" content="Empire Collectibles">
 <meta name="robots" content="index, follow">
-<meta name="description" content="Empire Collectibles is the leading comics and collectibles store in San Diego">
+<meta name="description" content="Empire Collectibles is San Diego's #1 New Comic Book Store. Your one stop shop for back-issue comics, Board Games, Collectible Card Games, Comic and Pulp Magazines.">
 <meta name="keywords" content="comic book store, collectibles, collectibles store, comic book, card shop, card game shop, board game, board game shop, san diego, san diego comic book store, san diego collectibles store, empire collectibles, empire collectibles san diego">
 <meta name="theme-color" content="rgb(0,47,97)">
 <meta name="msapplication-navbutton-color" content="rgb(0,47,97)">
@@ -76,6 +76,10 @@
 		color: rgb(0,0,0);
 	}
 
+	.section a:hover {
+		color: rgb(255,255,255);
+	}
+
 	/*nav*/
 	.nav-item {
 		background-color: rgb(22,93,160); /*light blue*/
@@ -131,6 +135,12 @@
 		max-width: 100%;
 	}
 
+	.active-date {
+		font-weight: 900;
+		background-color: rgb(188,62,66); /*red*/
+		border-radius: 20px;
+	}
+
 	/*mobile*/
 	@media (max-width: 576px) {
 		#main-banner {
@@ -149,10 +159,17 @@
 
 <script type="text/javascript">
 	$(function() {
+		//make nav active on click
 		$('.nav-link').on('click', function() {
 			$('.nav-link').removeClass('active');
 			$(this).addClass('active');
 		});
+		//highlight current date in hours if applicable
+		let date = new Date();
+		let weekday = date.getDay();
+		if(weekday > 2 || weekday == 0){
+			$('.date-'+weekday).addClass('active-date');
+		}
 	});
 </script>
 
@@ -222,24 +239,24 @@
 </nav>
 
 <div id="main-section" class="row">
-<div class="col-md-3 section">
+<div class="col-md-3 section text-center">
 <br>
 <p>HOURS</p>
-<p>WED 10AM - 6PM</p>
-<p>THU 10AM - 6PM</p>
-<p>FRI 10AM - 6PM</p>
-<p>SAT 10AM - 5PM</p>
-<p>SUN 12PM - 5PM</p>
+<p class="date-3">WED 10AM - 6PM</p>
+<p class="date-4">THU 10AM - 6PM</p>
+<p class="date-5">FRI 10AM - 6PM</p>
+<p class="date-6">SAT 10AM - 5PM</p>
+<p class="date-0">SUN 12PM - 5PM</p>
 </div>
 
 <div class="col-md-9 section">
 	<br>
-	<p>Main Section</p>
+	<p>Empire Collectibles is San Diego's #1 New Comic Book Store. Your one stop shop for back-issue comics, Board Games, Collectible Card Games, Comic and Pulp Magazines. </p>
 </div>
 
 <div class="col-md-12 section">
 <br>
-<p>More</p>
+<a href="https://shop.tcgplayer.com/Product/ChangeShowFilter?filterName=sellerfilter&filterValue=510c501c" target="_blank">Shop Empire Collectibles on <img src="tcgplayer-logo.png" width="160px"></a>
 <br>
 <br>
 <br>
