@@ -163,6 +163,11 @@
 		$('.nav-link').on('click', function() {
 			$('.nav-link').removeClass('active');
 			$(this).addClass('active');
+			if(! $(this).hasClass('home-link') ) {
+				$('#page-area').html('<br><p>Coming Soon</p>');
+			} else {
+				$('#page-area').html('<br><p>Empire Collectibles is San Diego\'s #1 New Comic Book Store. Your one stop shop for back-issue comics, Board Games, Collectible Card Games, Comic and Pulp Magazines.</p>');
+			}
 		});
 		//highlight current date in hours if applicable
 		let date = new Date();
@@ -204,7 +209,7 @@
 <ul class="nav justify-content-center">
   <!-- <span class=""> -->
   <li class="nav-item">
-    <a class="nav-link active" href="#">Home</a>
+    <a class="nav-link active home-link" href="#">Home</a>
   </li>
   <li class="nav-item">
     <a class="nav-link" href="#">Pulps</a>
@@ -249,9 +254,9 @@
 <p class="date-0">SUN 12PM - 5PM</p>
 </div>
 
-<div class="col-md-9 section">
+<div id="page-area" class="col-md-9 section">
 	<br>
-	<p>Empire Collectibles is San Diego's #1 New Comic Book Store. Your one stop shop for back-issue comics, Board Games, Collectible Card Games, Comic and Pulp Magazines. </p>
+	<p>Empire Collectibles is San Diego's #1 New Comic Book Store. Your one stop shop for back-issue comics, Board Games, Collectible Card Games, Comic and Pulp Magazines.</p>
 </div>
 
 <div class="col-md-12 section">
