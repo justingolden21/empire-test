@@ -40,12 +40,17 @@
 		/*background-color: rgb(0,47,97); /*dark blue*/
 	}
 	::-moz-selection {
-	  background: rgb(22,93,160); /*light blue*/
+	  background: rgb(188,62,66); /*red*/
 	  color: #fff;
 	}
 	::selection {
-	  background: rgb(22,93,160); /*light blue*/
+	  background: rgb(188,62,66); /*red*/
 	  color: #fff;
+	}
+
+	img {
+		max-width: 100%;
+		max-height: 100%;
 	}
 
 	p, a, .nav-link {
@@ -67,7 +72,7 @@
 		padding-bottom: 40px;
 	}
 	.text-red {
-		color: rgb(188,62,66); /*red*/		
+		color: rgb(188,62,66); /*red*/	
 	}
 	.text-blue {
 		color: rgb(22,93,160); /*light blue*/
@@ -158,23 +163,53 @@
 <body>
 
 <script type="text/javascript">
+	let tabData;
 	$(function() {
-		//make nav active on click
-		$('.nav-link').on('click', function() {
-			$('.nav-link').removeClass('active');
-			$(this).addClass('active');
-			if(! $(this).hasClass('home-link') ) {
-				$('#page-area').html('<br><p>Coming Soon</p>');
-			} else {
-				$('#page-area').html('<br><p>Empire Collectibles is San Diego\'s #1 New Comic Book Store. Your one stop shop for back-issue comics, Board Games, Collectible Card Games, Comic and Pulp Magazines.</p>');
+
+		//load json data
+		$.getJSON("tab-data.json", function(data) {
+			tabData = data;
+
+			//make nav active on click
+			//then load tab data
+			$('.nav-link').on('click', function() {
+				$('.nav-link').removeClass('active');
+				$(this).addClass('active');
+				$('#page-area').html(tabData[$(this).attr('data-tab-info')]);
+			});
+
+
+			//get hash (#) and load respective tab and make it active (click the tab)
+			//TODO: add right and left arrows for tabs and have transition animation
+			let navLinks = $('.nav-link');
+			for(let i=0; i<navLinks.length; i++) {
+				if(navLinks.get(i).href.indexOf(location.hash)!=-1){
+					// $('.nav-link').removeClass('active');
+
+					// console.log(navLinks.get(i).addClass('hi') );
+					// navLinks.get(i).addClass('active');
+
+					// $('#page-area').html(tabData[navLinks.get(i).attr('data-tab-info')]);
+					navLinks.get(i).click();
+					break;
+				}
 			}
+
+
 		});
+
+
+
 		//highlight current date in hours if applicable
 		let date = new Date();
 		let weekday = date.getDay();
 		if(weekday > 2 || weekday == 0){
 			$('.date-'+weekday).addClass('active-date');
 		}
+
+
+
+
 	});
 </script>
 
@@ -209,35 +244,35 @@
 <ul class="nav justify-content-center">
   <!-- <span class=""> -->
   <li class="nav-item">
-    <a class="nav-link active home-link" href="#">Home</a>
+    <a class="nav-link active home-link" data-tab-info="home" href="#home">Home</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Pulps</a>
+    <a class="nav-link" data-tab-info="pulps" href="#pulps">Pulps</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Golden Age</a>
+    <a class="nav-link" data-tab-info="golden" href="#golden">Golden Age</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Silver & Bronze Age</a>
+    <a class="nav-link" data-tab-info="silverbronze" href="#silverbronze">Silver & Bronze Age</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Copper & Modern Age</a>
+    <a class="nav-link" data-tab-info="coppermodern" href="#coppermodern">Copper & Modern Age</a>
   </li>
 
 <!--   </span>
   <span class=""> -->
 
   <li class="nav-item">
-    <a class="nav-link" href="#">Comic Magazines</a>
+    <a class="nav-link" data-tab-info="magazines" href="#magazines">Comic Magazines</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Misc</a>
+    <a class="nav-link" data-tab-info="misc" href="#misc">Misc</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">How to Buy/Sell</a>
+    <a class="nav-link" data-tab-info="buysell" href="#buysell">How to Buy/Sell</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="#">Cards</a>
+    <a class="nav-link" data-tab-info="cards" href="#cards">Cards</a>
   </li>
   <!-- </span> -->
 </ul>
@@ -254,9 +289,10 @@
 <p class="date-0">SUN 12PM - 5PM</p>
 </div>
 
+<i class="fas fa-cheron-left"></i>
+<i class="fas fa-cheron-right"></i>
 <div id="page-area" class="col-md-9 section">
-	<br>
-	<p>Empire Collectibles is San Diego's #1 New Comic Book Store. Your one stop shop for back-issue comics, Board Games, Collectible Card Games, Comic and Pulp Magazines.</p>
+	<!-- html gets dynamically inserted by js that loads json -->
 </div>
 
 <div class="col-md-12 section">
