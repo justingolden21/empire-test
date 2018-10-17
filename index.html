@@ -146,6 +146,22 @@
 		border-radius: 20px;
 	}
 
+	#leftArrow, #rightArrow {
+		margin: 20px;
+		background-color: rgb(188,62,66); /*red*/
+		border-radius: 50%;
+		padding: 10px;
+		cursor: pointer;
+	}
+	#rightArrow {
+		right: 0;
+		position: absolute;
+	}
+	#leftArrow:hover, #rightArrow:hover {
+		background-color: rgb(255,255,255);
+		color: rgb(188,62,66); /*red*/
+	}
+
 	/*mobile*/
 	@media (max-width: 576px) {
 		#main-banner {
@@ -175,6 +191,7 @@
 			$('.nav-link').on('click', function() {
 				$('.nav-link').removeClass('active');
 				$(this).addClass('active');
+				// $('#page-area').html('<i id="leftArrow" class="fas fa-chevron-left"></i><i id="rightArrow" class="fas fa-chevron-right"></i>' + tabData[$(this).attr('data-tab-info')]);
 				$('#page-area').html(tabData[$(this).attr('data-tab-info')]);
 			});
 
@@ -194,6 +211,19 @@
 					break;
 				}
 			}
+
+			$('#rightArrow').on('click', function() {
+				let currentTab = $('.nav-link.active');
+				let dataTabIdx = parseInt(currentTab.attr('data-tab-order') );
+				console.log(dataTabIdx);
+				let nextTab = currentTab.next('.nav-link');
+				// let nextTab = $('.nav-link').find('[data-tab-order="' + dataTabIdx+1 + '"]');
+				console.log(currentTab.html() );
+				console.log(nextTab );
+				nextTab.click();
+				// currentTab.removeClass('active');
+				// nextTab.addClass('active');
+			});
 
 
 		});
@@ -244,35 +274,35 @@
 <ul class="nav justify-content-center">
   <!-- <span class=""> -->
   <li class="nav-item">
-    <a class="nav-link active home-link" data-tab-info="home" href="#home">Home</a>
+    <a class="nav-link active home-link" data-tab-order="1" data-tab-info="home" href="#home">Home</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-tab-info="pulps" href="#pulps">Pulps</a>
+    <a class="nav-link" data-tab-order="2" data-tab-info="pulps" href="#pulps">Pulps</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-tab-info="golden" href="#golden">Golden Age</a>
+    <a class="nav-link" data-tab-order="3" data-tab-info="golden" href="#golden">Golden Age</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-tab-info="silverbronze" href="#silverbronze">Silver & Bronze Age</a>
+    <a class="nav-link" data-tab-order="4" data-tab-info="silverbronze" href="#silverbronze">Silver & Bronze Age</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-tab-info="coppermodern" href="#coppermodern">Copper & Modern Age</a>
+    <a class="nav-link" data-tab-order="5" data-tab-info="coppermodern" href="#coppermodern">Copper & Modern Age</a>
   </li>
 
 <!--   </span>
   <span class=""> -->
 
   <li class="nav-item">
-    <a class="nav-link" data-tab-info="magazines" href="#magazines">Comic Magazines</a>
+    <a class="nav-link" data-tab-order="6" data-tab-info="magazines" href="#magazines">Comic Magazines</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-tab-info="misc" href="#misc">Misc</a>
+    <a class="nav-link" data-tab-order="7" data-tab-info="misc" href="#misc">Misc</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-tab-info="buysell" href="#buysell">How to Buy/Sell</a>
+    <a class="nav-link" data-tab-order="8" data-tab-info="buysell" href="#buysell">How to Buy/Sell</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link" data-tab-info="cards" href="#cards">Cards</a>
+    <a class="nav-link" data-tab-order="9" data-tab-info="cards" href="#cards">Cards</a>
   </li>
   <!-- </span> -->
 </ul>
@@ -289,8 +319,6 @@
 <p class="date-0">SUN 12PM - 5PM</p>
 </div>
 
-<i class="fas fa-cheron-left"></i>
-<i class="fas fa-cheron-right"></i>
 <div id="page-area" class="col-md-9 section">
 	<!-- html gets dynamically inserted by js that loads json -->
 </div>
